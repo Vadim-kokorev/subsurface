@@ -29,8 +29,8 @@ class FifthSheetImport implements ToModel,WithHeadingRow
                 'region'    => $row['region'],
            ]);
         }   
-}    
-    /* public function subject(array $row)
+    
+    public function subject(array $row)
     {
         $region = Region::where('region', trim($row[2]))->first();
         
@@ -42,9 +42,8 @@ class FifthSheetImport implements ToModel,WithHeadingRow
            ]);
         }
 
-    }
-    */
-
+    }   
+}
 /*class SecondSheetImport implements ToModel
 {
     public function model(array $row)
