@@ -13,24 +13,16 @@ class NedraImport implements WithMultipleSheets,WithHeadingRow
     public function sheets(): array
     {
         return [
-           /* 0 => new FirstSheetImport(),
+            /*0 => new FirstSheetImport(),
             1 => new SecondSheetImport(),
             2 => new ThirdSheetImport(),
-            3 => new FourthSheetImport(), */
+            3 => new FourthSheetImport(),*/ 
             4 => new FifthSheetImport(),
         ];
     }
-}
-class FifthSheetImport implements ToModel,WithHeadingRow
-{
-    public function model(array $row)
-    {
-            return new Region([
-                'region'    => $row['region'],
-           ]);
-        }   
-    
-    public function subject(array $row)
+} 
+
+/*    public function subject(array $row)
     {
         $region = Region::where('region', trim($row[2]))->first();
         
@@ -44,7 +36,7 @@ class FifthSheetImport implements ToModel,WithHeadingRow
 
     }   
 }
-/*class SecondSheetImport implements ToModel
+class SecondSheetImport implements ToModel
 {
     public function model(array $row)
     {
