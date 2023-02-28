@@ -22,7 +22,7 @@ class NedraImport implements WithMultipleSheets,WithHeadingRow
     }
 } 
 
-/*    public function subject(array $row)
+   /* public function subject(array $row)
     {
         $region = Region::where('region', trim($row[2]))->first();
         
