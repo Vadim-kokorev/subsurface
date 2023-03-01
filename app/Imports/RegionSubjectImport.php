@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
-class FifthSheetImport implements ToModel, WithHeadingRow, WithUpserts
+class RegionSubjectImport implements ToModel, WithHeadingRow, WithUpserts
 {
 
     public function model(array $row)

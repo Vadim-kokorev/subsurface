@@ -1,15 +1,9 @@
 <?php
 
 namespace App\Imports;
-
-use App\Models\Subject;
-use App\Models\Region;
-use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class NedraImport implements WithMultipleSheets, WithHeadingRow
+class NedraImport implements WithMultipleSheets
 {
 
     public function sheets(): array
@@ -19,7 +13,7 @@ class NedraImport implements WithMultipleSheets, WithHeadingRow
             1 => new SecondSheetImport(),
             2 => new ThirdSheetImport(),
             3 => new FourthSheetImport(),*/
-            4 => new FifthSheetImport(),
+            4 => new RegionSubjectImport(),
         ];
     }
 } 
