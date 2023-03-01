@@ -13,25 +13,21 @@ class FifthSheetImport implements ToModel, WithHeadingRow, WithUpserts
     {
             
         return new Region([
-                'region' => $row['region'],]);
-        }
+                'region' => trim($row['region']),]);
     
-        public function uniqueBy()
-        {
-            return 'region';
-        } 
-}
-    /* public function subject(array $row)
-    {
-            $region = Region::where('region', trim($row[2]))->first();
+       $region = Region::where('region', trim($row['region']))->first();
             
             if($region && $region->id_region) {
                 return new Subject([
-                    'name'    => $row[0],
-                    'short_name' => $row[1],
+                    'name'    => $row["name"],
+                    'short_name' => $row["short_name"],
                      'region_id' => $region->id_region,
                ]);
             }
     
-        }       
-}*/
+    }   
+        public function uniqueBy()
+        {
+            return 'region';
+        }     
+}

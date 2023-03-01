@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Imports;
+
 use App\Models\Subject;
 use App\Models\Region;
 use Illuminate\Support\Facades\Hash;
@@ -7,16 +9,16 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class NedraImport implements WithMultipleSheets,WithHeadingRow 
+class NedraImport implements WithMultipleSheets, WithHeadingRow
 {
-   
+
     public function sheets(): array
     {
         return [
             /*0 => new FirstSheetImport(),
             1 => new SecondSheetImport(),
             2 => new ThirdSheetImport(),
-            3 => new FourthSheetImport(),*/ 
+            3 => new FourthSheetImport(),*/
             4 => new FifthSheetImport(),
         ];
     }
