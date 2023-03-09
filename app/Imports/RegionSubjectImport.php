@@ -9,38 +9,21 @@ use Maatwebsite\Excel\Concerns\ToModel;
 
 class RegionSubjectImport implements WithHeadingRow, ToModel
 {
+    protected $region;
     public function model(array $row)
     {
         DB::table('region')->upsert([
             ['region' => trim($row['region'])],
         ], ['region']);
-        
-       
+
+        $this->region = DB::table('region')
+            ->select('region', 'id_region')
+            ->get();
+
+        $region = $this->region->where('region', trim($row['region']))->first();
+
         DB::table('subject')->insert([
-        ['name' => trim($row['name']), 'short_name' => trim($row['short_name'])/*, 'region_id' => trim($row['region'])*/],
+            ['name' => trim($row['name']), 'short_name' => trim($row['short_name']), 'region_id' => $region->id_region]
         ]);
-    
     }
 }
-   /* public function model(array $row)
-    {
-
-        return new Region([
-            'region' => trim($row['region']),
-        ]);
-
-        $region = Region::where('region', trim($row['region']))->first();
-
-        if ($region && $region->id_region) {
-            return new Subject([
-                'name'    => $row["name"],
-                'short_name' => $row["short_name"],
-                'region_id' => $region->id_region,
-            ]);
-        }
-    }
-    public function uniqueBy()
-    {
-        return 'region';
-    }
-}*/
