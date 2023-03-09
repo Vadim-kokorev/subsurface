@@ -5,15 +5,21 @@ namespace App\Imports;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Illuminate\Support\Facades\DB;
-use App\Imports\NedraImport;
+use Maatwebsite\Excel\Concerns\ToModel;
 
-class RegionSubjectImport implements WithHeadingRow
+class RegionSubjectImport implements WithHeadingRow, ToModel
 {
-    public function region(array $row)
+    public function model(array $row)
     {
         DB::table('region')->upsert([
             ['region' => trim($row['region'])],
         ], ['region']);
+        
+       
+        DB::table('subject')->insert([
+        ['name' => trim($row['name']), 'short_name' => trim($row['short_name'])/*, 'region_id' => trim($row['region'])*/],
+        ]);
+    
     }
 }
    /* public function model(array $row)
