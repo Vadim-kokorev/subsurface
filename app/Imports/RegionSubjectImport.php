@@ -9,7 +9,8 @@ use Maatwebsite\Excel\Concerns\ToModel;
 
 class RegionSubjectImport implements WithHeadingRow, ToModel
 {
-    protected $region;
+    private $region;
+    public $subject;
     public function model(array $row)
     {
         DB::table('region')->upsert([

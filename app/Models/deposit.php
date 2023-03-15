@@ -15,5 +15,5 @@ class deposit extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['deposit', 'development', 'lisense_area'];
+    protected $fillable = ['deposit', 'development',];
 }
