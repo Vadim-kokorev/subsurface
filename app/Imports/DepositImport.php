@@ -14,15 +14,19 @@ class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
 
     public function model(array $row)
     {
-        DB::table('deposit')->upsert(
+       /* DB::table('deposit')->upsert(
             ['deposit' => trim($row['deposit']), 'development' => trim($row['development'])],
             ['deposit']
         );
+        $this->subject = DB::table('subject')
+            ->select('short_name', 'id_subject')
+            ->get();
+            $subject = $this->subject->where('short_name', trim($row['subject']))->first();*/
         $this->deposit = DB::table('deposit')
             ->select('deposit', 'id_deposit')
             ->get();
-        $this->subject = DB::table('subject')
-            ->select('short_name', 'id_subject')
+        $this->area = DB::table('license_area')
+            ->select('id_area', 'area')
             ->get();
         $this->area = DB::table('license_area')
             ->select('id_area', 'area')
@@ -30,20 +34,18 @@ class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
 
         $deposit = $this->deposit->where('deposit', trim($row['deposit']))->first();
 
-        $subject = $this->subject->where('short_name', trim($row['subject']))->first();
+        $area = $this->area->where('area', trim($row['license_area']))->first();
 
-        
-
-        if ($subject === NULL) {
-            var_dump($subject, trim($row['subject']));
+        if ($area === NULL) {
+            var_dump($area, trim($row['license_area']));
         }
 
-        DB::table('subject_deposit')->upsert([
+        /*DB::table('subject_deposit')->upsert([
             ['deposit_id' => $deposit->id_deposit, 'subject_id' => $subject->id_subject]
-        ], ['deposit_id', 'subject_id']);
+        ], ['deposit_id', 'subject_id']);*/
 
-        DB::table('deposit_area')->upsert([
+        DB::table('deposit_area')->insert([
             ['area_id' => $area->id_area, 'deposit_id' => $deposit->id_deposut]
-        ], ['deposit_id', 'subject_id']);
+        ]);
     }
 }
