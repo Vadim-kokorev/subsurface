@@ -11,9 +11,9 @@ class NedraImport implements WithMultipleSheets
     {
         return [
             /*0 => new FirstSheetImport(),
-            1 => new SecondSheetImport(),*/
+            1 => new SecondSheetImport(),
             2 => new LicenseAreaImport(),
-            4 => new RegionSubjectImport(),
+            4 => new RegionSubjectImport(),*/
             3 => new DepositImport(),
         ];
     }
