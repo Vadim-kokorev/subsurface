@@ -17,11 +17,12 @@ class RegionSubjectImport implements WithHeadingRow, ToModel
             ['region' => trim($row['region'])],
         ], ['region']);
 
-        $this->region = DB::table('region')
+        $region = $this->region = DB::table('region')
             ->select('region', 'id_region')
-            ->get();
+            ->where('region', trim($row['region']))->first();
+            
 
-        $region = $this->region->where('region', trim($row['region']))->first();
+        /*$region = $this->region->where('region', trim($row['region']))->first();*/
 
         DB::table('subject')->insert([
             ['name' => trim($row['name']), 'short_name' => trim($row['short_name']), 'region_id' => $region->id_region]

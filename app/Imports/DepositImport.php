@@ -28,9 +28,6 @@ class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
         $this->area = DB::table('license_area')
             ->select('id_area', 'area')
             ->get();
-        $this->area = DB::table('license_area')
-            ->select('id_area', 'area')
-            ->get();
 
         $deposit = $this->deposit->where('deposit', trim($row['deposit']))->first();
 

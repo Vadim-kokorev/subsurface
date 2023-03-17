@@ -6,7 +6,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class LicenseAreaImport implements WithHeadingRow, ToModel/*, WithValidation*/
+class LicenseImport implements WithHeadingRow, ToModel/*, WithValidation*/
 {
     public $deposit;
     public $area;
