@@ -16,7 +16,7 @@ use App\Imports\NedraImport;
 
 /*Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');*/
+})->purpose('Display an inspiring quote');
 Artisan::command("import", function() {
     Excel::import(new NedraImport, 'C:\OSPanel\domains\example-app\app\users.xlsx');
-})->purpose('Import data from Excel');
+})->purpose('Import data from Excel');*/
