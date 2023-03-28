@@ -3,18 +3,18 @@
 namespace App\Imports;
 
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-
 class NedraImport implements WithMultipleSheets
 {
-
-    public function sheets(): array
+     public function sheets():  array
     {
-        return [
+        return
+          [
             /*0 => new SubsurfaceImport(),
-            1 => new SecondSheetImport(),
-            4 => new RegionSubjectImport(),*/
+            1 => new LicenseareaImport(),
+            4 => new RegionSubjectImport(),
+            2 => new LicenseImport(),*/
             3 => new DepositImport(),
-            /*2 => new LicenseImport(),*/
-        ];
+         ];
     }
 } 
+
