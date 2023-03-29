@@ -31,28 +31,21 @@ class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
         $reg = trim($row['license_area']);
         $regex = "/(.*?) \((.*)/";
         $reg = preg_replace($regex, "$1", $reg);
-        $strarea = explode("\n", $reg);
+        /*$arrarea = explode("\n", $reg);*/
+        $strarea = array_values(array_unique(explode("\n", $reg)));
+        var_dump($strarea);
         for ($i = 0; $i < count($strarea); $i++){
-            $area = $this->area = DB::table('license_area')
+            $vararea = $this->area = DB::table('license_area')
             ->select('id_area', 'area')
-            ->where('area', 'like', '%' .$strarea[$i].'%')->first();
+            ->where('area', 'like', $strarea[$i].'%')->first();
+        
             DB::table('deposit_area')->insert([
-                ['area_id' => $area->id_area, 'deposit_id' => $deposit->id_deposit]
+                ['area_id' => $vararea->id_area, 'deposit_id' => $deposit->id_deposit]
             ]);
         }
-        $area = $this->area = DB::table('license_area')
-            ->select('id_area', 'area')
-            ->where('area', 'like', '%' .$strarea[$i].'%')->first();
-            DB::table('deposit
-            _area')->insert([
-                ['area_id' => $area->id_area, 'deposit_id' => $deposit->id_deposit]
-            ]);
+    
         DB::table('subject_deposit')->insert([
             ['deposit_id' => $deposit->id_deposit, 'subject_id' => $subject->id_subject]
-        ]);
-
-        DB::table('deposit_area')->insert([
-            ['area_id' => $area->id_area, 'deposit_id' => $deposit->id_deposit]
         ]);
     }
 }
