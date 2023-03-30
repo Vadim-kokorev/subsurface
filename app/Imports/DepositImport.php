@@ -14,10 +14,19 @@ class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
     public $subject;
     public $area;
   
-
     public function model(array $row)
     {
-        DB::table('deposit')->upsert(
+        $reg = trim($row['license_area']);
+        $regex = "/(.*?) \((.*)/";
+        $reg = preg_replace($regex, "$1", $reg);
+        $strarea = array_values(array_unique(explode("\n", $reg)));
+        for ($i = 0; $i < count($strarea); $i++){
+
+        DB::table('license_area')->upsert([
+            ['area' => $strarea[$i]],
+        ], ['area']);
+    }
+        /*DB::table('deposit')->upsert(
             ['deposit' => Str::before($row['deposit'], "("), 'development' => trim($row['development'])],
             ['deposit']
         );
@@ -31,7 +40,6 @@ class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
         $reg = trim($row['license_area']);
         $regex = "/(.*?) \((.*)/";
         $reg = preg_replace($regex, "$1", $reg);
-        /*$arrarea = explode("\n", $reg);*/
         $strarea = array_values(array_unique(explode("\n", $reg)));
         var_dump($strarea);
         for ($i = 0; $i < count($strarea); $i++){
@@ -46,6 +54,6 @@ class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
     
         DB::table('subject_deposit')->insert([
             ['deposit_id' => $deposit->id_deposit, 'subject_id' => $subject->id_subject]
-        ]);
+        ]);*/
     }
 }
