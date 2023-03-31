@@ -5,9 +5,9 @@ namespace App\Imports;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class LicenseImport implements WithHeadingRow, ToModel/*, WithValidation*/
+class LicenseImport implements WithChunkReading, WithHeadingRow, ToModel/*, WithValidation*/
 {
     public $user;
     public $area;
@@ -17,12 +17,12 @@ class LicenseImport implements WithHeadingRow, ToModel/*, WithValidation*/
         $area = DB::table('license_area')
             ->select('area', 'id_area')
             ->where('area', trim($row['area']))->first();
-
+        var_dump($area);
         $user = DB::table('subsurface_user')
             ->select('subsurface_user', 'id_user')
             ->where('subsurface_user', trim($row['user']))->first();
-        if ($user === NULL) {
-            var_dump($user, trim($row['user'],));
+        if ($area === NULL) {
+            var_dump(trim($row['area'],));
         }
 
         DB::table('license')->insert([
@@ -43,5 +43,9 @@ class LicenseImport implements WithHeadingRow, ToModel/*, WithValidation*/
                 'area_id' => $area->id_area
             ],
         ]);
+    }
+    public function chunkSize(): int
+    {
+        return 500;
     }
 }

@@ -6,9 +6,10 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 
-class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
+class DepositImport implements WithChunkReading, WithHeadingRow, ToModel/*, WithValidation*/
 {
     protected $deposit;
     public $subject;
@@ -51,5 +52,9 @@ class DepositImport implements WithHeadingRow, ToModel/*, WithValidation*/
         DB::table('subject_deposit')->insert([
             ['deposit_id' => $deposit->id_deposit, 'subject_id' => $subject->id_subject]
         ]);
+    }
+    public function chunkSize(): int
+    {
+        return 500;
     }
 }
