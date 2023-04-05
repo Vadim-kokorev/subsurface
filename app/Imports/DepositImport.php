@@ -17,6 +17,10 @@ class DepositImport implements WithChunkReading, WithHeadingRow, ToModel/*, With
 
     public function model(array $row)
     {
+        DB::table('deposit')->upsert(
+            ['deposit' => Str::before($row['deposit'], "("), 'development' => trim($row['development'])],
+            ['deposit']
+        );
         $deposit = $this->deposit = DB::table('deposit')
         ->select('deposit', 'id_deposit')
         ->where('deposit', Str::before($row['deposit'], "("))->first();
@@ -37,10 +41,6 @@ class DepositImport implements WithChunkReading, WithHeadingRow, ToModel/*, With
                 ['area_id' => $vararea->id_area, 'deposit_id' => $deposit->id_deposit]
             ]);
         }
-        DB::table('deposit')->upsert(
-            ['deposit' => Str::before($row['deposit'], "("), 'development' => trim($row['development'])],
-            ['deposit']
-        );
         $subject = DB::table('subject')
     ->select('short_name', 'id_subject')
     ->where('short_name',trim($row['subject']))->first();
