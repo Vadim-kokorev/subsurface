@@ -11,7 +11,7 @@ class NedraImport implements WithMultipleSheets
           [
             0 => new SubsurfaceImport(),
             4 => new RegionSubjectImport(),
-            /*2 => new LicenseImport(),*/
+            2 => new LicenseImport(),
             3 => new DepositImport(),
          ];
     }

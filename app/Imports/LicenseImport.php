@@ -7,23 +7,22 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class LicenseImport implements WithChunkReading, WithHeadingRow, ToModel/*, WithValidation*/
+class LicenseImport implements WithChunkReading, WithHeadingRow, ToModel
 {
     public $user;
     public $area;
     public function model(array $row)
     {
+        DB::table('license_area')->upsert([
+            ['area' => trim($row['area'])],
+        ], ['area']);
 
         $area = DB::table('license_area')
             ->select('area', 'id_area')
             ->where('area', trim($row['area']))->first();
-        var_dump($area);
         $user = DB::table('subsurface_user')
             ->select('subsurface_user', 'id_user')
             ->where('subsurface_user', trim($row['user']))->first();
-        if ($area === NULL) {
-            var_dump(trim($row['area'],));
-        }
 
         DB::table('license')->insert([
             [
