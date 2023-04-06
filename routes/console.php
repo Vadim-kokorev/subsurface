@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Artisan;
-
+use App\Imports\NedraImport;
 /*
 |--------------------------------------------------------------------------
 | Console Routes
@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
+/*Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+Artisan::command("import", function() {
+    Excel::import(new NedraImport, 'C:\OSPanel\domains\example-app\app\users.xlsx');
+})->purpose('Import data from Excel');*/
