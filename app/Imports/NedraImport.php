@@ -9,10 +9,10 @@ class NedraImport implements WithMultipleSheets
     {
         return
           [
-            0 => new SubsurfaceImport(),
-            4 => new RegionSubjectImport(),
+            /*0 => new SubsurfaceImport(),
+            4 => new RegionSubjectImport(),*/
             2 => new LicenseImport(),
-            3 => new DepositImport(),
+            //3 => new DepositImport(),
          ];
     }
 }; 
